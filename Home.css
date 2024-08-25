@@ -1,0 +1,40 @@
+.logo-picture {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  margin-right: 10px;
+  margin-left: 0px;
+  transition: box-shadow 3s;
+}
+
+.logo-picture:hover {
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5); /* Shadow on hover */
+}
+
+.Home-container {
+  display: flex;
+  margin-top: 100px;
+  justify-content: center;
+  align-items: center;
+  width: 1fr;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.logo-text {
+  font-size: 42px;
+  font-family: Roboto;
+  color: #9f51cf;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.body-text {
+  font-size: 32px;
+  font-family: Roboto;
+  color: #9f51cf;
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
