@@ -114,20 +114,41 @@
 .timeline-item .date{ font-weight: 700; color: var(--ink); }
 .timeline-item .text{ color: var(--muted); }
 
-/* ---- FAQ (simple accordion) ---- */
-.faq{ margin-top: 28px; }
-.faq h2{ margin: 0 0 10px; color: var(--brand-700); }
-.faq-list{ list-style: none; padding: 0; margin: 0; }
-.faq-item{
-  background: var(--white);
+/* === FAQ width + bullets fix === */
+.faq-list{
+  list-style: none;          /* remove bullets */
+  padding-left: 0;           /* remove left indent */
+  margin: 0;
+}
+
+.faq-q {
+  width: 100%;
+  text-align: left;
+  padding: 14px 18px;
+  font-weight: 600;
+  border: 0;
+  background: var(--white);   /* ✅ force light background */
+  color: var(--ink);          /* ✅ text color */
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.faq-item {
+  background: var(--white);   /* keep cards consistent */
   border-radius: 14px;
   margin: 8px 0;
   box-shadow: var(--card-shadow);
+  padding: 8px;
 }
-.faq-q{
-  width: 100%; text-align: left; padding: 14px 18px;
-  font-weight: 600; border: 0; background: transparent; cursor: pointer;
-  display: flex; justify-content: space-between; align-items: center;
+
+
+.faq-toggle{
+  margin-left: 12px;
+  flex: 0 0 auto;
 }
-.faq-a{ padding: 0 18px 16px; color: var(--muted); }
-.faq-toggle{ color: var(--brand-700); font-size: 20px; }
+
+/* Optional: make all cards visually equal width on small screens too */
+.page.about .faq { max-width: 680px; } /* or remove this line to let it be full width */
