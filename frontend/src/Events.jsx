@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./Events.css";
 
 const events = []; // fill later with real events
@@ -12,8 +13,8 @@ function EmptyState() {
           We’re planning the next lineup. Join our Discord or follow our Instagram to get notified.
         </p>
         <div className="cta-row">
-          <a className="btn btn-primary" href="https://discord.gg/jAYYvFAurX" target="_blank" rel="noreferrer">Join Discord</a>
-          <a className="btn btn-outline" href="https://www.instagram.com/vtaiml/" target="_blank" rel="noreferrer">Follow Instagram</a>
+          <a className="btn" href="https://discord.gg/jAYYvFAurX" target="_blank" rel="noreferrer">Join Discord</a>
+          <a className="btn" href="https://www.instagram.com/vtaiml/" target="_blank" rel="noreferrer">Follow Instagram</a>
         </div>
       </div>
     </section>
@@ -36,8 +37,8 @@ function EventCard({ e }) {
           <span>{e.location}</span>
         </div>
         <div className="cta-row">
-          {e.rsvp && <a className="btn btn-primary" href={e.rsvp} target="_blank" rel="noreferrer">RSVP</a>}
-          {e.calendar && <a className="btn btn-outline" href={e.calendar} target="_blank" rel="noreferrer">Add to Calendar</a>}
+          {e.rsvp && <a className="btn" href={e.rsvp} target="_blank" rel="noreferrer">RSVP</a>}
+          {e.calendar && <a className="btn" href={e.calendar} target="_blank" rel="noreferrer">Add to Calendar</a>}
         </div>
       </div>
     </article>
@@ -45,17 +46,27 @@ function EventCard({ e }) {
 }
 
 export default function Events() {
+  const [activeTab, setActiveTab] = useState("Upcoming");
+  const tabs = ["Upcoming", "Past", "Workshops", "Talks", "Social"];
+
   return (
     <main className="page">
       <header className="page-head">
         <h1>Events</h1>
         <p>Talks, workshops, and project nights.</p>
+
         <div className="chip-row">
-          <button className="chip chip-active">Upcoming</button>
-          <button className="chip">Past</button>
-          <button className="chip">Workshops</button>
-          <button className="chip">Talks</button>
-          <button className="chip">Social</button>
+          {tabs.map(t => (
+            <button
+              key={t}
+              type="button"
+              className={`chip ${activeTab === t ? "chip-active" : ""}`}
+              onClick={() => setActiveTab(t)}
+              aria-pressed={activeTab === t}
+            >
+              {t}
+            </button>
+          ))}
         </div>
       </header>
 

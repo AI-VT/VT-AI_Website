@@ -1,103 +1,151 @@
-@media (min-width: 1050px) {
-  * {
-    font-family: Roboto;
-    color: #9f51cf;
-  }
+/* ===== Design tokens ===== */
+:root {
+  --purple: #6a0dad;
+  --purple-200: rgba(106, 45, 230, .15);
+  --purple-300: rgba(106, 45, 230, .25);
+  --surface: #fff;
+  --text: #213547;
+  --shadow: 0 18px 45px rgba(71, 45, 156, 0.12);
+}
 
-  .events-container {
-    margin-top: 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 100px;
-    height: 100vh;
-    align-items: center;
-    justify-content: space-around;
-  }
-
-  .events-box {
-    width: 1000px;
-    border: 2px solid #9f51cf;
-    border-radius: 7px;
-    margin-bottom: 20px;
-    padding: 10px;
-    transition:
-      box-shadow 1s,
-      background-color 1s,
-      border-width 0.15s;
-  }
-
-  .events-box:hover {
-    border-width: medium;
-    box-shadow: 20px 30px 3px 2px rgba(159, 81, 207, 0.3);
-    background-color: rgb(241, 236, 236);
-  }
-
-  h3 {
-    padding-left: 3px;
-  }
-
-  .bullets {
-    list-style: none;
-    padding: 3px;
-  }
-
-  .bullets li {
-    margin: 10px 0;
-  }
-
-  p {
-    padding: 3px;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #fff;       /* keep chips/CTAs white in dark */
+    --text: #242424;       /* not really used for CTA text */
   }
 }
 
-@media (max-width: 1050px) {
-  * {
-    font-family: Roboto;
-  }
+/* ===== Page layout ===== */
+.page {
+  max-width: 960px;
+  margin: 48px auto;
+  padding: 0 16px;
+}
 
-  .events-container {
-    margin-top: 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 100px;
-    height: 100vh;
-    align-items: center;
-    justify-content: space-around;
-  }
+@media (max-width: 640px) {
+  .page { margin-top: 32px; }
+}
 
-  .events-box {
-    border: 2px solid #9f51cf;
-    border-radius: 7px;
-    margin-bottom: 20px;
-    padding: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
-    transition:
-      box-shadow 1s,
-      background-color 1s,
-      border-width 0.15s;
-  }
+/* ===== Empty state card ===== */
+.empty { margin: 0 auto 48px; }
+.empty-card {
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 32px 28px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.empty-badge {
+  display: inline-block;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
 
-  .events-box:hover {
-    border-width: medium;
-    box-shadow: 20px 30px 3px 2px rgba(159, 81, 207, 0.3);
-    background-color: rgb(241, 236, 236);
-  }
+/* ===== Chips ===== */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin: 12px 0 22px;
+}
 
-  h3 {
-    padding-left: 3px;
-  }
+/* Single definition for .chip */
+.chip {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--surface);
+  color: var(--purple);
+  border: 2px solid var(--purple);
+  border-radius: 16px;
+  padding: 10px 18px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: box-shadow .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
 
-  .bullets {
-    list-style: none;
-    padding: 3px;
-  }
+.chip:hover { box-shadow: 0 2px 10px var(--purple-200); }
 
-  .bullets li {
-    margin: 10px 0;
-  }
+.chip:focus-visible {
+  box-shadow: 0 0 0 3px var(--purple-300);
+}
 
-  p {
-    padding: 3px;
-  }
+.chip:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+/* active = permanently filled purple */
+.chip-active {
+  background: var(--purple);
+  color: #fff;
+  border-color: var(--purple);
+  box-shadow: none;
+}
+
+/* ===== CTA buttons/links (scoped) ===== */
+.cta-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+/* normalize anchor rendering */
+a.btn { appearance: none; -webkit-appearance: none; }
+
+/* Base CTA */
+.page .cta-row .btn {
+  background: var(--surface);
+  color: var(--purple);
+  border: 2px solid var(--purple);
+  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s ease, color .2s ease, border-color .2s ease, transform .1s ease;
+}
+
+/* visited/links */
+.page .cta-row .btn:link,
+.page .cta-row .btn:visited {
+  color: var(--purple);
+}
+
+/* hover/focus */
+.page .cta-row .btn:hover,
+.page .cta-row .btn:focus-visible {
+  background: var(--purple);
+  color: #fff;
+  border-color: var(--purple);
+}
+
+/* active click feedback */
+.page .cta-row .btn:active {
+  transform: translateY(1px);
+}
+
+/* disabled state */
+.page .cta-row .btn[aria-disabled="true"],
+.page .cta-row .btn:disabled {
+  opacity: .55;
+  pointer-events: none;
+}
+
+/* ===== Optional: lightweight global button reset (scoped) =====
+   Avoid global button rules. If you must style native buttons,
+   add a class like .btn to them in JSX to pick up CTA styles. */
+
+/* ===== Typography bits you had (kept minimal) ===== */
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
 }
