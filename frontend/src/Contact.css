@@ -1,0 +1,81 @@
+:root{
+  --brand:#8b5cf6; --brand-700:#6d28d9; --ink:#1f2937; --muted:#6b7280;
+  --bg:#f6f5ff; --white:#fff;
+  --shadow:0 10px 24px rgba(139,92,246,.20);
+  --card-shadow:0 8px 30px rgba(17,24,39,.08);
+}
+
+.page.contact{
+  max-width: min(1000px, 92vw);
+  margin: 48px auto 96px;
+  padding: 0 8px;
+}
+
+.page-head{ text-align:center; margin-bottom:18px; }
+.page-head h1{ margin:0 0 8px; font-size:clamp(28px,3vw,44px); color:var(--brand-700); }
+.page-head p{ margin:0; color:var(--muted); }
+
+/* socials */
+.social-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap:12px;
+  margin: 18px 0 24px;
+}
+.social-card{
+  background:var(--white);
+  border-radius:16px;
+  padding:16px 18px;
+  text-align:center;
+  text-decoration:none;
+  color:inherit;
+  box-shadow:var(--card-shadow);
+  transition:transform .06s ease, box-shadow .2s ease;
+}
+.social-card:hover{ transform:translateY(-2px); box-shadow:0 12px 36px rgba(17,24,39,.12); }
+.social-card h3{ margin:0 0 6px; color:var(--ink); }
+.social-card p{ margin:0; color:var(--brand-700); font-weight:600; }
+
+/* form */
+.form-card{
+  background:var(--white);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:var(--card-shadow);
+}
+.form-card h2{ margin:0 0 12px; color:var(--brand-700); }
+
+.row{
+  display:grid;
+  gap:12px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-bottom:12px;
+}
+
+label{ display:flex; flex-direction:column; gap:6px; font-weight:600; color:#374151; }
+.block{ margin-top:6px; }
+
+input, textarea{
+  width:100%;
+  font: inherit;
+  padding:10px 12px;
+  border:1.5px solid #e5e7eb;
+  border-radius:12px;
+  outline:none;
+  background:#fff;
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+input:focus, textarea:focus{
+  border-color:#c4b5fd;
+  box-shadow:0 0 0 4px rgba(139,92,246,.15);
+}
+
+.cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:12px; }
+.btn{
+  display:inline-block; padding:10px 16px; border-radius:12px;
+  font-weight:600; border:2px solid transparent; text-decoration:none;
+}
+.btn-primary{ background:var(--brand); color:#fff; box-shadow:var(--shadow); }
+.btn-primary:hover{ background:var(--brand-700); }
+.btn-outline{ color:var(--brand-700); background:#fff; border-color:var(--brand-700); }
+.btn-outline:hover{ background:rgba(139,92,246,.08); }
