@@ -2,30 +2,25 @@ import { useState } from "react";
 import "./About.css";
 
 const features = [
-  { title: "Hands-on Workshops", desc: "Intro-to-ML, Python notebooks, model evaluation, and practical AI tooling. Come to learn by doing." },
-  { title: "Project Sprints", desc: "Small teams ship cool builds—computer vision demos, LLM apps, data viz, and more. Great for résumés." },
-  { title: "Tech Talks", desc: "Talks from students, faculty, and industry guests. Learn what’s current and where AI is going next." },
-  { title: "Community", desc: "Meet other builders, find collaborators, prep for interviews, and network with mentors & recruiters." },
-];
-
+    { title: "Hands-on Workshops", desc: "Intro-to-ML, Python notebooks, model evaluation, and practical AI tooling. Come to learn by doing." },
+    { title: "Team-wide ML Competitions & Projects", desc: "Collaborate on challenges, hackathon-style builds, and longer-term projects that apply AI in creative ways. Great for résumés." },
+    { title: "Tech Talks", desc: "Talks from students, faculty, and industry guests. Learn what’s current and where AI is going next." },
+    { title: "Community", desc: "Meet other builders, find collaborators, prep for interviews, and network with mentors & recruiters." },
+  ];
+  
+// Updated leadership
 const leaders = [
-  { name: "Firstname Lastname", role: "President", link: "" },
-  { name: "Firstname Lastname", role: "Vice President", link: "" },
-  { name: "Firstname Lastname", role: "Projects Lead", link: "" },
-  { name: "Firstname Lastname", role: "Events Lead", link: "" },
+  { name: "Christopher Nassif", role: "President", link: "" },
+  { name: "Tapan Japi", role: "Treasurer", link: "" },
+  { name: "Miles Thomas", role: "Webmaster", link: "" },
+  { name: "Chreston Miller", role: "Advisor", link: "" },
 ];
 
-const milestones = [
-  { date: "Fall 2025", text: "Kickoff meeting & recruiting new project teams." },
-  { date: "Fall 2025", text: "Weekly workshops + lightning talks." },
-  { date: "Spring 2026", text: "Demo Day: shipable project showcases." },
-];
-
+// FAQ with the project-team question removed
 const faqs = [
   { q: "Who can join?", a: "All VT students are welcome—no prior ML experience required. Bring curiosity and we’ll help with the rest." },
   { q: "What should I know before coming?", a: "Basic Python or JavaScript helps, but many workshops start from first principles with guided notebooks." },
   { q: "How often do you meet?", a: "Weekly during the semester for workshops or project nights. Special talks/events pop up throughout the term." },
-  { q: "How do I get on a project team?", a: "Join a sprint at the start of each term or hop into an existing team via our Discord’s #projects channel." },
 ];
 
 function Avatar({ name }) {
@@ -71,31 +66,10 @@ export default function About() {
               <div className="leader-info">
                 <h3>{m.name}</h3>
                 <p className="role">{m.role}</p>
-                {m.link ? (
-                  <a className="mini-link" href={m.link} target="_blank" rel="noreferrer">Contact</a>
-                ) : (
-                  <span className="mini-link disabled">Contact</span>
-                )}
               </div>
             </article>
           ))}
         </div>
-      </section>
-
-      {/* Timeline */}
-      <section className="timeline">
-        <h2>Milestones</h2>
-        <ol className="timeline-list">
-          {milestones.map((m, i) => (
-            <li className="timeline-item" key={i}>
-              <div className="dot" />
-              <div className="content">
-                <div className="date">{m.date}</div>
-                <div className="text">{m.text}</div>
-              </div>
-            </li>
-          ))}
-        </ol>
       </section>
 
       {/* FAQ */}

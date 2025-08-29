@@ -115,20 +115,34 @@
 .timeline-item .text{ color: var(--muted); }
 
 /* === FAQ width + bullets fix === */
-.faq-list{
-  list-style: none;          /* remove bullets */
-  padding-left: 0;           /* remove left indent */
+.faq-list {
+  list-style: none;          
+  padding-left: 0;           
   margin: 0;
+
+  display: flex;             /* make it a column flexbox */
+  flex-direction: column;
+  gap: 12px;                 /* spacing between items */
+  width: 100%;               /* stretch to container width */
+}
+
+.faq-item {
+  background: var(--white);
+  border-radius: 14px;
+  box-shadow: var(--card-shadow);
+  padding: 0;                /* padding handled by .faq-q */
+  width: 100%;               /* ensure full width */
+  box-sizing: border-box;
 }
 
 .faq-q {
-  width: 100%;
+  width: 100%;               /* button stretches */
   text-align: left;
   padding: 14px 18px;
   font-weight: 600;
   border: 0;
-  background: var(--white);   /* ✅ force light background */
-  color: var(--ink);          /* ✅ text color */
+  background: var(--white);
+  color: var(--ink);
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -136,13 +150,11 @@
   box-sizing: border-box;
 }
 
-.faq-item {
-  background: var(--white);   /* keep cards consistent */
-  border-radius: 14px;
-  margin: 8px 0;
-  box-shadow: var(--card-shadow);
-  padding: 8px;
+.faq-a {
+  padding: 0 18px 14px;      /* answer text indented nicely */
+  color: var(--ink);
 }
+
 
 
 .faq-toggle{

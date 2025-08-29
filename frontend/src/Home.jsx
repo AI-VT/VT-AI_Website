@@ -13,7 +13,7 @@ export default function Home() {
         connecting with peers, faculty, and industry.
       </p>
       <div className="cta-row">
-        <a className="btn btn-primary" href="https://discord.gg/jAYYvFAurX">Join the Club</a>
+        <a className="btn btn-primary" href="https://discord.gg/jAYYvFAurX">Join the Discord</a>
         <Link className="btn btn-outline" to="/Projects">View Projects</Link>
       </div>
     </section>
