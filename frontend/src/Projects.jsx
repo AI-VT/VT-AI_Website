@@ -1,14 +1,22 @@
+// src/pages/Projects.jsx
 import { Link } from "react-router-dom";
 import "./Projects.css";
+import donkeycarDemo from "./ai_ml_donkeycar_demo_video.mp4";
 
+
+// Put ai_ml_donkeycar_demo_video.mp4 in your project's /public folder.
+// Then reference it at "/ai_ml_donkeycar_demo_video.mp4" below.
 const projects = [
   {
     id: "donkeycar",
     title: "DonkeyCar Imitation Learning",
+    tagline:
+      "This demo is fully controlled by a machine-learning policy (imitation learning).",
     desc:
       "A reinforcement and imitation learning project built around the DonkeyCar simulator. Includes conda environment setup, policy training notebooks, and integration with the simulator for testing learned models.",
     stack: "Python • Jupyter Notebook • Miniconda • DonkeyCar Simulator",
-    link: "https://github.com/ChrisNassif/donkeycar_imitation_learning"
+    link: "https://github.com/ChrisNassif/donkeycar_imitation_learning",
+    videoSrc: donkeycarDemo
   },
   {
     id: "discordbot",
@@ -16,8 +24,7 @@ const projects = [
     desc:
       "A custom-built Discord bot with modular features for games, server management, and automation. Uses JSON config, a guild whitelist, and extensible commands to enhance server interactivity and efficiency.",
     stack: "Python • discord.py • JSON • CSV",
-    // repo is private — leave link empty to hide the button
-    link: ""
+    link: "" // private repo → leaves 'View Repo' button hidden
   },
   {
     id: "telescope",
@@ -25,7 +32,7 @@ const projects = [
     desc:
       "One-stop detector for AI-generated text, code, and images. Reproduces & improves Binoculars and Aeroblade with smaller, faster models. Uses cross-perplexity for text/code and VAE-based latent-space signals for images.",
     stack: "Python • Flask • PyTorch • Hugging Face • JavaScript • HTML/CSS",
-    demo: "http://joshfcooper.com/telescope",              // use HTTP per disclaimer
+    demo: "http://joshfcooper.com/telescope", // use HTTP per their hosting
     devpost: "https://devpost.com/software/telescope-4kx9u6",
     note: "Use HTTP (not HTTPS) for the live demo."
   }
@@ -35,8 +42,27 @@ function ProjectCard({ p }) {
   return (
     <article className="project-card">
       <h3>{p.title}</h3>
+
+      {p.tagline && <p className="tagline">{p.tagline}</p>}
       <p className="desc">{p.desc}</p>
       {p.stack && <p className="stack">{p.stack}</p>}
+
+      {/* Local video embed */}
+      {p.videoSrc && (
+        <div className="embed">
+          <video
+            className="video"
+            src={p.videoSrc}
+            controls
+            playsInline
+            muted
+            loop
+            preload="metadata"
+          >
+            Sorry, your browser doesn’t support embedded videos.
+          </video>
+        </div>
+      )}
 
       <div className="btn-row">
         {p.demo && (
@@ -84,7 +110,9 @@ export default function Projects() {
         </section>
       ) : (
         <section className="grid">
-          {projects.map((p) => <ProjectCard key={p.id} p={p} />)}
+          {projects.map((p) => (
+            <ProjectCard key={p.id} p={p} />
+          ))}
         </section>
       )}
     </main>
