@@ -1,13 +1,27 @@
 import { useState } from "react";
 import "./Events.css";
 
-const events = []; // fill later with real events
+const events = [
+  {
+    id: 1,
+    title: "Weekly Lecture",
+    description: "Join us for an engaging talk on tech and innovation.",
+    tags: ["Lecture", "Community"],
+    time: "2:00pm - 3:00pm",
+    location: "Torgessen Hall 1060",
+    start: "2025-09-28T14:00:00-04:00",
+    end: "2025-09-28T15:00:00-04:00",
+    categories: ["Talks"],
+    rsvp: "",
+    calendar: ""
+  }
+];
 
-function EmptyState() {
+function EmptyState({ message = "No events right now" }) {
   return (
     <section className="empty">
       <div className="empty-card">
-        <div className="empty-badge">No events right now</div>
+        <div className="empty-badge">{message}</div>
         <h2>Check back soon!</h2>
         <p>
           We’re planning the next lineup. Join our Discord or follow our Instagram to get notified.
@@ -21,12 +35,21 @@ function EmptyState() {
   );
 }
 
+const byStartAsc = (a, b) => new Date(a.start) - new Date(b.start);
+const byStartDesc = (a, b) => new Date(b.start) - new Date(a.start);
+const isPast = (e, now = new Date()) => new Date(e.end || e.start) < now;
+const isUpcoming = (e, now = new Date()) => new Date(e.start) >= now;
+
 function EventCard({ e }) {
+  const d = new Date(e.start);
+  const month = d.toLocaleString("en-US", { month: "short" });
+  const day = d.getDate();
+
   return (
     <article className="event">
       <div className="date-badge">
-        <span className="month">{e.month}</span>
-        <span className="day">{e.day}</span>
+        <span className="month">{month}</span>
+        <span className="day">{day}</span>
       </div>
       <div className="event-body">
         <h3>{e.title}</h3>
@@ -49,6 +72,12 @@ export default function Events() {
   const [activeTab, setActiveTab] = useState("Upcoming");
   const tabs = ["Upcoming", "Past", "Workshops", "Talks", "Social"];
 
+  const filtered = (() => {
+    if (activeTab === "Upcoming") return [...events].filter(isUpcoming).sort(byStartAsc);
+    if (activeTab === "Past")     return [...events].filter(isPast).sort(byStartDesc);
+    return events.filter(e => (e.categories || []).includes(activeTab)).sort(byStartAsc);
+  })();
+
   return (
     <main className="page">
       <header className="page-head">
@@ -70,11 +99,11 @@ export default function Events() {
         </div>
       </header>
 
-      {events.length === 0 ? (
-        <EmptyState />
+      {filtered.length === 0 ? (
+        <EmptyState message={`No ${activeTab.toLowerCase()} events`} />
       ) : (
         <section className="grid">
-          {events.map(e => <EventCard key={e.id} e={e} />)}
+          {filtered.map(e => <EventCard key={e.id} e={e} />)}
         </section>
       )}
     </main>
