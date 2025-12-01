@@ -1,7 +1,5 @@
 import "./Lessons.css";
 
-import "./Lessons.css";
-
 const lessons = [
   {
     id: 1,
@@ -47,17 +45,25 @@ const lessons = [
   }
 ];
 
-
 function LessonCard({ lesson }) {
   return (
     <article className="lesson">
       <h3>{lesson.title}</h3>
       <p>{lesson.description}</p>
+
       <ul className="tags">
-        {lesson.tags.map(tag => <li key={tag}>{tag}</li>)}
+        {lesson.tags.map((tag) => (
+          <li key={tag}>{tag}</li>
+        ))}
       </ul>
+
       {lesson.link && (
-        <a className="btn" href={lesson.link} target="_blank" rel="noreferrer">
+        <a
+          className="btn"
+          href={lesson.link}
+          target="_blank"
+          rel="noreferrer"
+        >
           View Lesson
         </a>
       )}
@@ -67,15 +73,26 @@ function LessonCard({ lesson }) {
 
 export default function Lessons() {
   return (
-    <main className="page">
-      <header className="page-head">
-        <h1>Lessons</h1>
-        <p>Learn AI & ML concepts with step-by-step guides and resources.</p>
-      </header>
+    <>
+      {/* 🧠 SEO for Lessons page */}
+      <title>Lessons | VT@AI</title>
+      <meta
+        name="description"
+        content="Browse VT@AI's AI and machine learning lessons, including A* pathfinding, reinforcement learning, deep learning, computer vision, and GPU programming."
+      />
 
-      <section className="grid">
-        {lessons.map(l => <LessonCard key={l.id} lesson={l} />)}
-      </section>
-    </main>
+      <main className="page">
+        <header className="page-head">
+          <h1>Lessons</h1>
+          <p>Learn AI & ML concepts with step-by-step guides and resources.</p>
+        </header>
+
+        <section className="grid">
+          {lessons.map((l) => (
+            <LessonCard key={l.id} lesson={l} />
+          ))}
+        </section>
+      </main>
+    </>
   );
 }

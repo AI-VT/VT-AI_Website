@@ -1,11 +1,8 @@
-// src/pages/Projects.jsx
+// src/Projects.jsx
 import { Link } from "react-router-dom";
 import "./Projects.css";
 import donkeycarDemo from "./ai_ml_donkeycar_demo_video.mp4";
 
-
-// Put ai_ml_donkeycar_demo_video.mp4 in your project's /public folder.
-// Then reference it at "/ai_ml_donkeycar_demo_video.mp4" below.
 const projects = [
   {
     id: "donkeycar",
@@ -47,7 +44,6 @@ function ProjectCard({ p }) {
       <p className="desc">{p.desc}</p>
       {p.stack && <p className="stack">{p.stack}</p>}
 
-      {/* Local video embed */}
       {p.videoSrc && (
         <div className="embed">
           <video
@@ -66,17 +62,32 @@ function ProjectCard({ p }) {
 
       <div className="btn-row">
         {p.demo && (
-          <a className="btn btn-primary" href={p.demo} target="_blank" rel="noreferrer">
+          <a
+            className="btn btn-primary"
+            href={p.demo}
+            target="_blank"
+            rel="noreferrer"
+          >
             Try It Now
           </a>
         )}
         {p.devpost && (
-          <a className="btn btn-outline" href={p.devpost} target="_blank" rel="noreferrer">
+          <a
+            className="btn btn-outline"
+            href={p.devpost}
+            target="_blank"
+            rel="noreferrer"
+          >
             Devpost
           </a>
         )}
         {p.link && (
-          <a className="btn btn-outline" href={p.link} target="_blank" rel="noreferrer">
+          <a
+            className="btn btn-outline"
+            href={p.link}
+            target="_blank"
+            rel="noreferrer"
+          >
             View Repo
           </a>
         )}
@@ -89,32 +100,46 @@ function ProjectCard({ p }) {
 
 export default function Projects() {
   return (
-    <main className="page projects">
-      <header className="page-head">
-        <h1>Projects</h1>
-        <p>Club builds, hackathon prototypes, and long-term research efforts.</p>
-      </header>
+    <>
+      {/* 🧠 SEO for Projects page */}
+      <title>Projects | VT@AI</title>
+      <meta
+        name="description"
+        content="Explore VT@AI projects, including DonkeyCar imitation learning, custom Discord bots, and Telescope—an AI-generated content detector built with PyTorch, Flask, and Hugging Face."
+      />
 
-      {projects.length === 0 ? (
-        <section className="empty">
-          <div className="empty-card">
-            <h2>None currently</h2>
-            <p>
-              We’re kicking off builds soon. Bring an idea, join a team, or propose a project at our next meeting!
-            </p>
-            <div className="cta-row">
-              <Link className="btn btn-primary" to="/events">See Events</Link>
-              <Link className="btn btn-outline" to="/contact">Contact Us</Link>
+      <main className="page projects">
+        <header className="page-head">
+          <h1>Projects</h1>
+          <p>Club builds, hackathon prototypes, and long-term research efforts.</p>
+        </header>
+
+        {projects.length === 0 ? (
+          <section className="empty">
+            <div className="empty-card">
+              <h2>None currently</h2>
+              <p>
+                We’re kicking off builds soon. Bring an idea, join a team, or
+                propose a project at our next meeting!
+              </p>
+              <div className="cta-row">
+                <Link className="btn btn-primary" to="/events">
+                  See Events
+                </Link>
+                <Link className="btn btn-outline" to="/contact">
+                  Contact Us
+                </Link>
+              </div>
             </div>
-          </div>
-        </section>
-      ) : (
-        <section className="grid">
-          {projects.map((p) => (
-            <ProjectCard key={p.id} p={p} />
-          ))}
-        </section>
-      )}
-    </main>
+          </section>
+        ) : (
+          <section className="grid">
+            {projects.map((p) => (
+              <ProjectCard key={p.id} p={p} />
+            ))}
+          </section>
+        )}
+      </main>
+    </>
   );
 }

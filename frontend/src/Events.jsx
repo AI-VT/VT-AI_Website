@@ -8,7 +8,7 @@ const events = [
     description: "Join us for an engaging talk on tech and innovation.",
     tags: ["Lecture", "Community"],
     time: "2:00pm - 3:00pm",
-    location: "Torgessen Hall 1060",
+    location: "Torgersen Hall 1060",
     start: "2025-09-28T14:00:00-04:00",
     end: "2025-09-28T15:00:00-04:00",
     categories: ["Talks"],
@@ -37,8 +37,24 @@ function EmptyState({ message = "No events right now" }) {
 
 const byStartAsc = (a, b) => new Date(a.start) - new Date(b.start);
 const byStartDesc = (a, b) => new Date(b.start) - new Date(a.start);
-const isPast = (e, now = new Date()) => new Date(e.end || e.start) < now;
-const isUpcoming = (e, now = new Date()) => new Date(e.start) >= now;
+
+const toDayStart = (d) => {
+  const x = new Date(d);
+  x.setHours(0, 0, 0, 0);
+  return x;
+};
+
+const isPast = (e) => {
+  const today = toDayStart(new Date());
+  const eventEnd = toDayStart(new Date(e.end || e.start));
+  return eventEnd < today;
+};
+
+const isUpcoming = (e) => {
+  const today = toDayStart(new Date());
+  const eventStart = toDayStart(new Date(e.start));
+  return eventStart > today;
+};
 
 function EventCard({ e }) {
   const d = new Date(e.start);
@@ -74,38 +90,70 @@ export default function Events() {
 
   const filtered = (() => {
     if (activeTab === "Upcoming") return [...events].filter(isUpcoming).sort(byStartAsc);
-    if (activeTab === "Past")     return [...events].filter(isPast).sort(byStartDesc);
+    if (activeTab === "Past") return [...events].filter(isPast).sort(byStartDesc);
     return events.filter(e => (e.categories || []).includes(activeTab)).sort(byStartAsc);
   })();
 
   return (
-    <main className="page">
-      <header className="page-head">
-        <h1>Events</h1>
-        <p>Talks, workshops, and project nights.</p>
+    <>
+      {/* 🧠 Page-level SEO */}
+      <title>Events | VT@AI</title>
+      <meta
+        name="description"
+        content="View upcoming and past events from VT@AI — Virginia Tech's AI & Machine Learning Club. Talks, workshops, project nights, and community meetups."
+      />
 
-        <div className="chip-row">
-          {tabs.map(t => (
-            <button
-              key={t}
-              type="button"
-              className={`chip ${activeTab === t ? "chip-active" : ""}`}
-              onClick={() => setActiveTab(t)}
-              aria-pressed={activeTab === t}
-            >
-              {t}
-            </button>
-          ))}
-        </div>
-      </header>
+      {/* 🧠 Structured Data (JSON-LD) for Google Events */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Event",
+          "name": events[0]?.title,
+          "startDate": events[0]?.start,
+          "endDate": events[0]?.end,
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "location": {
+            "@type": "Place",
+            "name": events[0]?.location,
+            "address": "Blacksburg, VA"
+          },
+          "description": events[0]?.description,
+          "organizer": {
+            "@type": "Organization",
+            "name": "VT@AI - Virginia Tech AI & Machine Learning Club",
+            "url": "https://vtai.netlify.app"
+          }
+        })}
+      </script>
 
-      {filtered.length === 0 ? (
-        <EmptyState message={`No ${activeTab.toLowerCase()} events`} />
-      ) : (
-        <section className="grid">
-          {filtered.map(e => <EventCard key={e.id} e={e} />)}
-        </section>
-      )}
-    </main>
+      <main className="page">
+        <header className="page-head">
+          <h1>Events</h1>
+          <p>Talks, workshops, and project nights.</p>
+
+          <div className="chip-row">
+            {tabs.map(t => (
+              <button
+                key={t}
+                type="button"
+                className={`chip ${activeTab === t ? "chip-active" : ""}`}
+                onClick={() => setActiveTab(t)}
+                aria-pressed={activeTab === t}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
+        </header>
+
+        {filtered.length === 0 ? (
+          <EmptyState message={`No ${activeTab.toLowerCase()} events`} />
+        ) : (
+          <section className="grid">
+            {filtered.map(e => <EventCard key={e.id} e={e} />)}
+          </section>
+        )}
+      </main>
+    </>
   );
 }
