@@ -85,7 +85,7 @@ export default function Contact() {
                 Send
               </button>
 
-              <a className="btn btn-outline" href="mailto:vtaiml@vt.edu">
+              <a className="btn btn-outline" href="mailto:chrisnassif@vt.edu">
                 Email directly
               </a>
             </div>
