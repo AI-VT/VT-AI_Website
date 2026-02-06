@@ -61,16 +61,6 @@ function ProjectCard({ p }) {
       )}
 
       <div className="btn-row">
-        {p.demo && (
-          <a
-            className="btn btn-primary"
-            href={p.demo}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Try It Now
-          </a>
-        )}
         {p.devpost && (
           <a
             className="btn btn-outline"
